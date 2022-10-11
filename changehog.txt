@@ -1,0 +1,20 @@
+Changes for 0.91
+
+- New distribution package that includes all support jars. Releases in both zip and tar.gz formats.
+- Updated docs.
+- Added readme.html.
+
+Changes for 1.0RC1
+
+- New cache types: TimerCache and HybridCache.
+- Moved AutoCache over to a ReferenceMap.
+- Improved configuration somewhat.
+- If a cache object is changed (that is, the object is replaced with the same key), then a clear is sent.
+
+Changes for 1.0RC2
+
+- Ported over to the latest version of JavaGroups (known now as JGroups): JGroups 2.2
+- [André Schild] JGroups protocol string adjustments to eliminate a potential deadlock upon start-up.
+- [Rajeev Kaul] MultiCacheManager now has a method to shut itself down. Communicator also supports a shutDown() method which is implemented by the JavaGroupsCommunicator.
+- Documenation update.
+- New public web site.

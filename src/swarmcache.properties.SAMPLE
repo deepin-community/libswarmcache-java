@@ -1,0 +1,4 @@
+# The Multicast IP address that SwarmCache will use for communication
+swarmcache.multicast.ip=231.12.21.132
+# The maximum number of objects in the LRU cache
+swarmcache.lru.size=10000

@@ -1,0 +1,80 @@
+libswarmcache-java (1.0RC2+cvs20071027-7.1) unstable; urgency=medium
+
+  * Non maintainer upload by the Reproducible Builds team.
+  * No source change upload to rebuild on buildd with .buildinfo files.
+
+ -- Holger Levsen <holger@debian.org>  Tue, 29 Dec 2020 03:44:07 +0100
+
+libswarmcache-java (1.0RC2+cvs20071027-7) unstable; urgency=low
+
+  * Team upload.
+
+  [ Miguel Landaeta ]
+  * Add versioned dependency on libjgroups-java (>= 2.12.2.Final).
+  * Add missing dependencies for libswarmcache-java. (Closes: #643730).
+  * Remove myself from Uploaders list since I was added by mistake.
+  * Add mh_clean call in clean target.
+
+  [ Emmanuel Bourg ]
+  * Removed the obsolete DM-Upload-Allowed flag
+  * Updated Standards-Version to 3.9.4 (no changes)
+  * Use canonical URLs for the Vcs-* fields
+  * Removed the unknown substitution variable ${shlibs:Depends}
+  * Transition to libcommons-collections3-java
+  * Removed the unused build dependency on libservlet2.5-java
+  * Generate Java 6 compatible bytecode
+  * debian/copyright: Updated to the Copyright Format 1.0
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Mon, 09 Sep 2013 22:21:27 +0200
+
+libswarmcache-java (1.0RC2+cvs20071027-6) unstable; urgency=low
+
+  * Team upload.
+  * Bump Standards-Version to 3.9.2. No changes were required.
+  * Modify dependency details on JGroups library:
+    - Update groupId in POM file.
+    - Replace artifact jgroups-all with jgroup.
+
+  [by sponsor Steffen Moeller]
+  * Added Miguel to uploaders
+  * Set DMUA flag for him
+
+ -- Miguel Landaeta <miguel@miguel.cc>  Sun, 25 Dec 2011 21:17:46 -0430
+
+libswarmcache-java (1.0RC2+cvs20071027-5) unstable; urgency=low
+
+  * Install POM file.
+  * Update Build-Depends: libservlet2.5-java.
+  * Remove unneeded Depends: default-jre-headless | java2-runtime.
+
+ -- Torsten Werner <twerner@debian.org>  Fri, 21 May 2010 22:13:43 +0200
+
+libswarmcache-java (1.0RC2+cvs20071027-4) unstable; urgency=low
+
+  * Update my email address
+  * Bump Standards-Version to 3.8.4
+  * Change Section to java
+  * Switch to default-jdk
+  * Switch to source format 3.0
+
+ -- Varun Hiremath <varun@debian.org>  Sat, 10 Apr 2010 18:47:22 -0400
+
+libswarmcache-java (1.0RC2+cvs20071027-3) unstable; urgency=low
+
+  * Move package to main because Build-Depends: libjgroups-java is in main
+    now.
+  * Bump up Standards-Version: 3.8.0 (no changes needed).
+
+ -- Torsten Werner <twerner@debian.org>  Sun, 17 Aug 2008 03:26:39 +0200
+
+libswarmcache-java (1.0RC2+cvs20071027-2) unstable; urgency=low
+
+  * Set Section to contrib because libjgroups-java is in non-free.
+
+ -- Varun Hiremath <varunhiremath@gmail.com>  Sun, 04 Nov 2007 21:12:38 +0530
+
+libswarmcache-java (1.0RC2+cvs20071027-1) unstable; urgency=low
+
+  * Initial release (Closes: #446659)
+
+ -- Varun Hiremath <varunhiremath@gmail.com>  Tue, 24 Apr 2007 17:19:10 +0530

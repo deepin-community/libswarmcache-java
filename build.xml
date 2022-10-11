@@ -1,0 +1,150 @@
+<?xml version="1.0" ?>
+<!-- ====================================================================== -->
+<!--                        S W A R M C A C H E                             -->
+<!--                                                                        -->
+<!--                          MAIN BUILD FILE                               -->
+<!-- ====================================================================== -->
+<project name="swarmcache" default="compile">
+
+ <!-- ===================================================================== -->
+ <!-- INIT  -->
+ <!-- ===================================================================== -->
+ <target name="init" description="Initializes the build environment.">
+
+  <!-- Project-wide properties -->
+  <!-- App name -->
+  <property name="app" value="swarmcache" />
+  <property name="version" value="1.0RC2" />
+
+  <!-- DEBUG setting -->
+  <property name="debug" value="on" />
+
+  <!-- Paths -->
+  <property name="classes" value="classes" />
+  <!-- Java Source -->
+  <property name="src" value="src" />
+  <!-- Directory for releases -->
+  <property name="dist" value="dist" />
+  <!-- Directory for Javadoc -->
+  <property name="docs" value="web/api" />
+  <!-- The executable libs -->
+  <property name="lib" value="lib" />
+  <!-- Release info -->
+  <property name="release.file" value="${dist}/${app}-${version}" />
+
+ </target>
+
+ <!-- ===================================================================== -->
+ <!-- PREPARE  -->
+ <!-- ===================================================================== -->
+ <target name="prepare" depends="init" description="Prepares for compilation">
+  <mkdir dir="${classes}" />
+
+  <!-- Classpath for compiling -->
+  <path id="classpath">
+   <fileset dir="${lib}"/>
+  </path>
+
+  <!-- Classpath for running -->
+  <path id="run.classpath">
+   <path refid="classpath"/>
+   <pathelement location="${classes}"/>
+  </path>
+
+ </target>
+
+ <!-- ===================================================================== -->
+ <!-- COMPILE  -->
+ <!-- ===================================================================== -->
+ 
+ <target name="compile" depends="prepare" description="Compiles .java source code.">
+  <javac srcdir="${src}" destdir="${classes}" debug="${debug}">
+   <classpath>
+    <path refid="classpath" />
+   </classpath>
+  </javac>
+ </target>
+
+ <!-- ===================================================================== -->
+ <!-- TEST  -->
+ <!-- ===================================================================== -->
+
+ <target name="test" depends="compile" description="Runs the interactive queue test.">
+  <java classname="net.sf.swarmcache.CacheTest" fork="yes">
+   <classpath refid="run.classpath"/>
+   <arg value="239.1.1.1"/>
+   <arg value="LRU"/>
+   <arg value="10"/>
+  </java>
+ </target>
+
+ <!-- ===================================================================== --> 
+ <!-- CLEAN  -->
+ <!-- ===================================================================== -->
+ <target name="clean" description="Clean all build products." depends="init">
+  <delete dir="${classes}"/>
+ </target>
+
+ <!-- ===================================================================== -->
+ <!-- JAR  -->
+ <!-- ===================================================================== -->
+ <target name="jar" depends="compile" description="Builds the JAR file.">
+  <mkdir dir="${dist}"/>
+  <jar jarfile="${release.file}.jar">
+   <fileset dir="${classes}" />
+  </jar>
+ </target>
+
+ <!-- ===================================================================== -->
+ <!-- DIST  -->
+ <!-- ===================================================================== -->
+ <target name="dist" depends="jar" description="Builds a release zip and tar.gz.">
+  <!-- Copy dist files -->
+  <copy todir="${dist}">
+   <fileset dir="${lib}">
+    <include name="*.jar"/>
+   </fileset>
+   <fileset dir=".">
+    <include name="readme.html"/>
+    <include name="changehog.txt"/>
+   </fileset>
+  </copy>  
+  <!-- Add version info -->
+  <replace file="${dist}/readme.html">
+   <replacefilter token="@version@" value="${version}"/>
+  </replace>
+  <!-- Build TAR file -->
+  <tar tarfile="${release.file}.tar">
+   <tarfileset dir="${dist}">
+    <include name="readme.html"/>
+    <include name="changehog.txt"/>
+    <include name="**/*.jar"/>
+   </tarfileset>
+  </tar>
+  <!-- Build TAR.GZ file -->
+  <gzip zipfile="${release.file}.tar.gz" src="${release.file}.tar"/>
+  <!-- Remove TAR file -->
+  <delete file="${release.file}.tar"/>
+  <!-- Build ZIP file -->
+  <zip zipfile="${release.file}.zip"> 
+   <zipfileset dir="${dist}">
+    <include name="readme.html"/>
+    <include name="changehog.txt"/>
+    <include name="**/*.jar"/>
+   </zipfileset>
+  </zip>
+ </target>
+ 
+ <!-- ====================================================================== -->
+ <!-- JAVADOC -->
+ <!-- ====================================================================== -->
+ <target name="javadoc" depends="prepare">
+  <javadoc
+    sourcepath="${src}"
+    destdir="${docs}"
+    packagenames="net.*">
+   <classpath refid="classpath" />
+  </javadoc>
+ </target>
+
+</project>
